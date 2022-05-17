@@ -1,0 +1,37 @@
+databaseChangeLog:
+  - changeSet:
+      id: create user_country_travel table
+      author: Atesh Nebiyev
+      changes:
+        - createTable:
+            tableName: user_country_travel
+            columns:
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_user_country_travel_user_id_to_user_id
+                    references: users(id)
+                    deleteCascade: true
+              - column:
+                  name: country_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_user_country_travel_country_id_to_country_id
+                    references: countries(id)
+                    deleteCascade: true
+              - column:
+                  name: travel_status
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: rating
+                  type: integer
+        - createIndex:
+            clustered: true
+            columns:
+              - column:
+                  name: travel_status
+            tableName: user_country_travel
+            indexName: idx_user_country_travel_read_status

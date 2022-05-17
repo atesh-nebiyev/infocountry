@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: infocountry
+  datasource:
+    url: jdbc:postgresql://localhost:5432/infocountry
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    river-class-name: org.postgresql.Driver
+  liquibase:
+    change-log: db/changelog/changelog-master.yaml

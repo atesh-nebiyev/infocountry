@@ -1,0 +1,63 @@
+table presidents {
+  id bigint
+  first_name text
+  middle_name text
+  last_name text
+  birth_date date
+  created_at timestamp
+  last_updated_at timestamp
+}
+
+
+table countries {
+  id bigint
+  name text
+  region text
+  territory bigint
+  population long
+  capital text
+  code long
+  language text
+  overall_rating decimal
+  created_at timestamp
+  last_updated_at timestamp
+}
+
+table presidents_countries {
+  country_id bigint [ref: - countries.id]
+  president_id bigint [ref: - presidents.id]
+}
+
+table users {
+  id bigint
+  alias text
+  firstname text
+  lastname text
+  created_at timestamp
+  last_updated_at timestamp
+}
+
+table user_login_details {
+  user_id bigint [ref: > users.id]
+  email text
+  password text
+}
+
+table user_country_travel
+ {
+  user_id bigint [ref: > users.id]
+  country_id bigint [ref: > countries.id]
+  travel_status enum [note: 'TRAVEL, WANT_TO_TRAVEL, CURRENTLY_TRAVELING']
+  rating integer
+}
+
+table user_country_comments {
+  id bigint
+  parent_comment_id bigint [ref: > user_country_comments.id]
+  user_id bigint [ref: > users.id]
+  country_id bigint [ref: > countries.id]
+  comment text
+  created_at timestamp
+  last_updated_at timestamp
+  status enum [note: 'EDITED, DELETED']
+}

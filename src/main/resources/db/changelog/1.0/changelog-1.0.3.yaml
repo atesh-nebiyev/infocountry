@@ -1,0 +1,26 @@
+databaseChangeLog:
+  - changeSet:
+      id: create president_countries table
+      author: Atesh Nebiyev
+      changes:
+        - createTable:
+            tableName: president_countries
+            columns:
+              - column:
+                  name: country_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_president_countries_country_id_to_president_id
+                    references: presidents(id)
+                    deleteCascade: true
+              - column:
+                  name: president_id
+                  type: bigint
+        - addForeignKeyConstraint:
+            constraintName: fk_president_countries_country_id_to_country_id
+            baseTableName: president_countries
+            baseColumnNames: country_id
+            referencedTableName: countries
+            referencedColumnNames: id
+            deleteCascade: true
+            validate: true

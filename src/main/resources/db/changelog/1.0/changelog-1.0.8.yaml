@@ -1,0 +1,9 @@
+databaseChangeLog:
+  - changeSet:
+      id: alter birth_date column data type in presidents
+      author: Atesh Nebiyev
+      changes:
+        - modifyDataType:
+            tableName: presidents
+            columnName: birth_date
+            newDataType: text
